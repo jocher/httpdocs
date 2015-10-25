@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+
+<style type="text/css">
+
+#banner-inner-wrapper {
+    display: table;
+    width: 96%;
+    margin: 0.375em auto; /* 6/16 = 0.375em; */
+}
+#banner-inner {
+    display: table-row;
+}
+#title {
+    display: table-cell;
+}
+#logo {
+    max-width: 100%;
+    vertical-align: middle;
+}
+#menu-nav {
+    display: table-cell;
+    vertical-align: bottom;
+    text-align: right;
+}
+#menu-button {
+    vertical-align: bottom;
+    float: right;
+    padding: .375em; /* 6/16 = .375em */
+    margin: 0 .375em 0 2em; /* 6/16 = .375em, 32/16 = 2em */
+    opacity: .7;
+    cursor: pointer;
+     
+    transition: all .2s linear;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+     
+    background-color: #4D8EBC;
+    background-image: linear-gradient(top,rgba(100, 152, 190, .5),rgba(30, 82, 120, .5));
+    background-position: left bottom;
+    background-repeat: repeat-x;
+}
+#menu-button.selected,
+#menu-button:active {
+    opacity: 1;
+     
+    box-shadow: 0 1px  1px rgba(120, 120, 120, .2);
+    background-color: #2E6288;
+    background-image: linear-gradient(top,rgba(25, 68, 99, .5),rgba(30, 82, 120, .5));
+     
+    margin-bottom: -.375em; /* 6/16 = .375em */
+}
+#langswitch {
+    
+	float:right;
+	
+	margin:4% 8% 0 0;
+	
+
+	display:block;width:64px;height:64px;border-radius:32px;
+	text-align:center;text-decoration:none;background:#CCC; line-height:1px;			    			
+    				
+}
+#langswitch li {
+    padding-top: 19px;
+	list-style:none;
+	font-size:10px;
+	font-weight:bold
+	
+}
+#langswitch a {
+    color:#fff;}
+</style>
+</head>
+
+<body>
+<header id="banner" role="banner">
+    <div id="banner-inner-wrapper">
+        <div id="banner-inner">
+            <hgroup id="title">
+                <img id="logo" src="image/logo.png" title="Responsive Bar" />
+            </hgroup>
+             
+            <nav id="menu-nav">
+                <!-- button to show and hide the menu -->
+                <div id="menu-button">
+                    <div id="menu-button-inner"></div>
+                </div>
+            </nav>
+             
+        </div>
+    </div>
+     
+    <!-- menu itself -->
+    <nav id="menu-drink">
+        <ul>
+            <li>
+                <a class="beer" href="#"><span class="icon"></span>Beer</a>
+            </li>
+            <li>
+                <a class="wine" href="#"><span class="icon"></span>Wines</a>
+            </li>
+            <li>
+                <a class="soft-drink" href="#"><span class="icon"></span>Soft Drinks</a>
+            </li>
+            <li>
+                <a class="coffee-tea" href="#"><span class="icon"></span>Coffee & Tea</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>

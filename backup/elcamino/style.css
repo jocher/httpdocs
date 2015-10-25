@@ -1,0 +1,147 @@
+/*
+Theme Name:     elcamino
+Description:    child of 2011
+Author:         jocher
+Template:       twentyeleven
+
+(optional values you can add: Theme URI, Author URI, Version, License, License URI, Tags, Text Domain)
+*/
+
+.one-column #page {
+    max-width: 1000px;
+}
+
+
+#branding img {
+	height: auto;
+	display: block;
+	min-width:138px;
+	width: 22%;
+	padding:4% 4% 0px 4%;
+}
+
+
+#access {
+	background: # FFF; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#fff, #fff);
+	background: -o-linear-gradient(#fff, #fff);
+	background: -webkit-gradient(linear, 0% 0%, 0% 0%, from(#fff), to(#fff)); /* older webkit syntax */
+	background: -webkit-linear-gradient(#fff, #fff);
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	clear: both;
+	display: block;
+	float: none;
+	margin:0 0 0 0 ;
+	width: 100%;
+}
+
+#access ul {
+	font-size: 13px;
+	list-style: none;
+	margin: 0 0 0 0;
+	padding-left: 0;
+	
+}
+#access li {
+	float: none;
+	position: static;
+	display: inline-block;
+}
+
+
+#access a {
+	color: #717284;
+	display: block;
+	line-height: 3.333em;
+	padding: 10px 20px;
+	text-decoration: none;
+}
+
+
+#access li:hover > a,
+#access a:focus {
+	background: #3c5269; /* Show a solid color for older browsers */
+	background: -moz-linear-gradient(#3c5269, #3c5269);
+	background: -o-linear-gradient(#3c5269, #3c5269);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3c5269), to(#3c5269)); /* Older webkit syntax */
+	background: -webkit-linear-gradient(#3c5269, #3c5269);
+	color: #fff;
+}
+
+
+/*footer*/
+
+#site-generator {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border-top: 1px solid #ddd;
+    color: #ddd;
+    font-size: 8px;
+    line-height: 2.2em;
+    padding: 0;
+    text-align: right;
+}
+#site-generator a {
+    color: #717284;
+    font-weight: normal;
+}
+#footer {
+	background: #FFF; /* Show a solid color for older browsers */
+	
+	clear: both;
+	display: block;
+	float: right;
+	margin: 0px auto 0px;
+	width: 100%;
+}
+
+#footer li {
+	float: left;
+	position: relative;
+}
+#footer a {
+    color: #717284;
+    display: block;
+    line-height: 3.333em;
+    padding: 0 9em 0 20px;
+    text-decoration: none;
+}
+
+
+#footer li:hover > a,
+#footer a:focus {
+	
+	color: #3c5269;
+	text-decoration:underline;
+}
+#footer ul {
+	font-size: 13px;
+	list-style: none;
+	margin: 0 0 0 0;
+	padding-left: 0;
+}
+/*custom language switcher*/
+
+#langswitch {
+    position: relative;
+	margin:4% 8% 0 0;
+	
+	float:right;
+	z-index:555;
+	
+
+	display:block;width:64px;height:64px;border-radius:32px;
+	text-align:center;text-decoration:none;background:#CCC; line-height:1px;			    			
+    				
+}
+#langswitch li {
+    padding-top: 19px;
+	list-style:none;
+	font-size:10px;
+	font-weight:bold
+	
+}
+#langswitch a {
+    color:#fff
+}
