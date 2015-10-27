@@ -73,8 +73,8 @@ if ( ! isset( $content_width ) ) {
 /************* THUMBNAIL SIZE OPTIONS *************/
 
 // Thumbnail sizes
-//add_image_size( 'bones-thumb-600', 600, 150, true );
-//add_image_size( 'bones-thumb-300', 300, 100, true );
+add_image_size( 'bones-thumb-600', 600, 150, true );
+add_image_size( 'bones-thumb-300', 300, 100, true );
 
 /*
 to add more sizes, simply copy a line from above
@@ -246,108 +246,4 @@ function bones_fonts() {
 add_action('wp_enqueue_scripts', 'bones_fonts');
 
 
-/*
-flexslider gallery test
-*/
-function build_gallery_content( $attrs ){
-
-    static $instance = 0;
-    $instance++;
-
-    /* 
-    Limiting what the user can do by 
-    locking down most short code options.
-    */
-    extract(shortcode_atts(array(
-            'id'         => $post->ID,
-            'include'    => '',
-            'exclude'    => ''
-    ), $attrs));
-
-    $id = intval($id);
-
-    if ( !empty($include) ) {
-         $params = array(
-                    'include' => $include,
-                    'post_status' => 'inherit',
-                    'post_type' => 'attachment',
-                    'post_mime_type' => 'image',
-                    'order' => 'ASC', 
-                    'orderby' => 'menu_order ID');
-            $_attachments = get_posts( $params );
-            $attachments = array();
-            foreach ( $_attachments as $key => $val ) {
-                    $attachments[$val->ID] = $_attachments[$key];
-            }
-    } elseif ( !empty($exclude) ) {
-            $params = array(
-                    'post_parent' => $id,
-                    'exclude' => $exclude,
-                    'post_status' => 'inherit',
-                    'post_type' => 'attachment',
-                    'post_mime_type' => 'image',
-                    'order' => 'ASC', 
-                    'orderby' => 'menu_order ID');
-            $attachments = get_children( $params );
-    } else {
-            $params = array(
-                    'post_parent' => $id, 
-                    'post_status' => 'inherit', 
-                    'post_type' => 'attachment',
-                    'post_mime_type' => 'image', 
-                    'order' => 'ASC',
-                    'orderby' => 'menu_order ID'); 
-            $attachments = get_children( $params );
-    }
-
-    if ( empty($attachments) )
-            return '';
-
-    $selector = "gallery-{$instance}";
-
-    $gallery_div = sprintf("<div class='flexslider'><ul id='%s' class='slides gallery galleryid-%d gallery-columns-1 gallery-size-full'>", $selector, $id);
-    $output = $gallery_div;
-
-
-    foreach ( $attachments as $id => $attachment ) {
-        /* 
-        Use wp_get_attachment_link to return a photo + link 
-        to attachment page or image
-        http://codex.wordpress.org/Function_Reference/wp_get_attachment_link 
-        */
-        $img = wp_get_attachment_image( $id, 'full', false);
-
-        $caption = '';
-
-        /*
-        Set the caption string if there is one.
-        */
-
-        if( $captiontag && trim($attachment->post_excerpt) ){
-            $caption = sprintf("\n\t<figcaption class='wp-caption-text gallery-caption'>\n\t<div>\n%s\n\t</div>\n\t</figcaption>", wptexturize($attachment->post_excerpt));
-        }
-
-        /*
-        Set the output for each slide.
-        */  
-        $output .= sprintf("<li class='gallery-item'><figure class='gallery-icon'>%s\n\t%s</figure></li>", $img, $caption);
-    }
-    $output .= '</ul></div>';
-    return $output;
-}
-function custom_gallery_shortcode( $output = '', $attrs){
-    $return = $output;
-
-    # Gallery function that returns new markup.
-    $gallery = build_gallery_content( $attrs );
-
-
-    if( !empty( $gallery ) ) {
-        $return = $gallery;
-    }
-
-    return $return;
-}
-
-add_filter( 'post_gallery', 'custom_gallery_shortcode', 10, 2);
 /* DON'T DELETE THIS CLOSING TAG */ ?>

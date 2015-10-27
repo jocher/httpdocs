@@ -85,7 +85,7 @@ html {
  * Remove default margin.
  */
 body {
-   margin: 4% 0 0 0;}
+   margin: 0;}
 
 /* ==========================================================================
    Links
@@ -224,7 +224,7 @@ dl,
 menu,
 ol,
 ul {
-  margin: 1em 0; }
+  margin: 0; }
 
 dd {
   margin: 0; }
@@ -272,7 +272,9 @@ svg:not(:root) {
  * Address margin not present in IE 8/9 and Safari 5.
  */
 figure {
-  margin: 0; }
+  margin:0 ;
+  
+   }
 
 /* ==========================================================================
    Forms
@@ -1307,6 +1309,10 @@ LAYOUT & GRID STYLES
   
   background-color: #fff;}
 
+  #inner-header{
+  padding-top: 37px;
+ }
+
 /*********************
 LINK STYLES
 *********************/
@@ -1421,9 +1427,7 @@ HEADER STYLES
 
 
 }
-#inner-header{
-  padding-top: 22px;
-}
+
 
 
 
@@ -1525,7 +1529,7 @@ POSTS & CONTENT STYLES
   border-radius: 3px;
   
   border: 1px solid #cccccc;*/
-  margin-bottom: 1.5em;}
+  margin-bottom: 0;}
 
   .hentry header {
     border-bottom: 1px solid #f8f9fa;
@@ -1559,7 +1563,7 @@ POSTS & CONTENT STYLES
 
 /* entry content */
 .entry-content {
-  padding: 1.5em 1.5em 0;
+  padding: 1.5em 0 0;
   /*
   image alignment on a screen this size may be
   a bit difficult. It's set to start aligning
@@ -1633,10 +1637,16 @@ POSTS & CONTENT STYLES
     max-width: 100%;
     margin-bottom: 0;
     width: 100%; }
-  .wp-caption p.wp-caption-text {
-    font-size: 0.85em;
-    margin: 4px 0 7px;
+  .wp-caption p .gallery-icon {
+    font-size: 66px;
+    margin: 12px 0 7px;
     text-align: center; }
+
+    .wp-caption-text {
+  max-width: 100%;
+  background: #eee;
+  padding: 5px;
+  /* images inside wp-caption */ }
 
 /* end .wp-caption */
 /* image gallery styles */
@@ -2034,13 +2044,14 @@ you can add resource intensive styles.
    max-width: 1000px;
    
     }
-   #inner-header{
-  padding-top: 44px;
-  margin-top: 44px;}
+   
   /*********************
   HEADER STYLES
   *********************/
   
+  #inner-header{
+  padding-top: 64px;
+ }
   /*********************
   NAVIGATION STYLES
   *********************/
@@ -2179,7 +2190,7 @@ you can add resource intensive styles.
                 padding:0 26px;
                 border-top: 33px;
           } 
-  #inner-header{border: 1px solid #e1e1e1; 
+ /* #inner-header{border: 1px solid #e1e1e1; 
                 border-bottom-style: none;
                 }
 
@@ -2190,6 +2201,7 @@ you can add resource intensive styles.
   #inner-footer{border: 1px solid #e1e1e1; 
                 border-top-style:none;
                 }
+                */
 
 .nav {
     
@@ -2341,3 +2353,4 @@ be set to display none.
   .respond-form,
   nav {
     display: none; } }
+

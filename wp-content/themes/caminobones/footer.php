@@ -26,6 +26,14 @@
 			</footer>
 
 		</div>
+        <script type="text/javascript" src="<?php bloginfo( 'template_url' );?>/library/slider/js/jquery.flexslider.js" > </script>
+<script type="text/javascript">
+        //Can also be used with $(document).ready()
+        jQuery(window) .load(function() {
+            animation: "slide"
+        });
+    });
+</script>
 
 		<?php // all js scripts are loaded in library/bones.php ?>
 		<?php wp_footer(); ?>

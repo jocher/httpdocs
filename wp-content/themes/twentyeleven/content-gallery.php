@@ -18,7 +18,7 @@
 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<h3 class="entry-format"><?php _e( 'Gallery', 'twentyeleven' ); ?></h3>
 		</hgroup>
-
+pipotte
 		<div class="entry-meta">
 			<?php twentyeleven_posted_on(); ?>
 		</div><!-- .entry-meta -->

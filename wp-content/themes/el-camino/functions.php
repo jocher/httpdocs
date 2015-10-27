@@ -22,7 +22,3 @@ function mychildtheme_setup() {
 	}
  add_action( 'after_setup_theme', 'mychildtheme_setup', 11 );
  
- // Create Slider Post Type
-require( get_template_directory() . '/inc/slider/slider_post_type.php' );
-// Create Slider
-require( get_template_directory() . '/inc/slider/slider.php' );

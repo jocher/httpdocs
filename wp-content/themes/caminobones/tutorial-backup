@@ -1,0 +1,252 @@
+
+
+joe's flexslider
+................................................
+html:
+
+<section>
+  <div class="flexslider">
+    <ul class="slides">
+        
+        <?php
+        query_posts(array('posts_per_page' => 3, 'category_name' => 'Featured'));
+        if(have_posts()) : while(have_posts()) : the_post();
+        ?>
+    
+          <li class="featured-post">
+            <?php the_post_thumbnail('slider-image'); ?>
+            <div class="caption">
+                <a href="<?php the_permalink(); ?>" class="slider-title"><?php the_title();?></a>
+                <?php the_excerpt(); ?>
+                <a href="<?php the_permalink(); ?>" class="btn">Read More!</a>
+            </div>
+
+            
+          </li>
+      
+        <?php
+            endwhile;
+            endif;
+            wp_reset_query();
+        ?>
+    </ul>
+  </div>
+</section>
+
+
+css:
+
+in the header:
+
+<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url'); ?>/library/slider/css/flexslider.css"/>
+
+in style.css:
+
+******************************************************************
+  slider  
+******************************************************************/
+.featured-post {
+  position: relative;
+  z-index: 1;
+  font-family: 'open sans',sans-serif;
+}
+.featured-post .caption {
+  position: absolute;
+  -webkit-border-radius:15px;
+  border-radius: 15px;
+  top:15px;
+  right: 15px;
+  padding: 10px;
+  color: #fff;
+  width: 90%;
+  background: #000;
+  opacity: .7;
+  font-size: 17px;
+  z-index: 2;
+}
+.featured-post .slider-title {
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'oswald', sans-serif;
+}
+.featured-post a:visited {
+  color: #fff;
+}
+.featured-post .btn {
+  text-align: center;
+  text-decoration: none;
+  background: #f29729;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+}
+@media only screen and (max-width: 767px){
+  .featured-post .caption {
+    width: 85%;
+    opacity: .70;
+  }
+}
+
+@media only screen and (max-width: 479px){
+  .featured-post p {
+    display; none;
+  }
+}
+....................................................................
+js: in the footer:
+
+<script type="text/javascript" src="<?php bloginfo( 'template_url' );?>/library/slider/js/jquery.flexslider.js" > </script>
+<script type="text/javascript">
+        //Can also be used with $(document).ready()
+        jQuery(window) .load(function() {
+            animation: "slide"
+        });
+    });
+</script>
+
+
+
+
+
+
+....................the other flex...................
+....................................................................
+
+
+// Enqueue Flexslider Files
+ 
+    function bones_slider_scripts() {
+        wp_enqueue_script( 'jquery' );
+ 
+        wp_enqueue_style( 'flex-style', get_template_directory_uri() . '/library/slider/css/flexslider.css' );
+ 
+        wp_enqueue_script( 'flex-script', get_template_directory_uri() .  '/library/slider/js/jquery.flexslider-min.js', array( 'jquery' ), false, true );
+    }
+    add_action( 'wp_enqueue_scripts', 'bones_slider_scripts' );
+
+    // Initialize Slider
+ 
+    function bones_slider_initialize() { ?>
+        <script type="text/javascript" charset="utf-8">
+            jQuery(window).load(function() {
+                jQuery('.flexslider').flexslider({
+                    animation: "slide",
+                    direction: "horizontal",
+                    slideshowSpeed: 7000,
+                    animationSpeed: 600
+                });
+            });
+        </script>
+    <?php }
+    add_action( 'wp_head', 'bones_slider_initialize' );
+
+    // Create Slider
+function build_gallery_content( $attrs ){
+
+    static $instance = 0;
+    $instance++;
+
+    /* 
+    Limiting what the user can do by 
+    locking down most short code options.
+    */
+    extract(shortcode_atts(array(
+            'id'         => $post->ID,
+            'include'    => '',
+            'exclude'    => ''
+    ), $attrs));
+
+    $id = intval($id);
+
+    if ( !empty($include) ) {
+         $params = array(
+                    'include' => $include,
+                    'post_status' => 'inherit',
+                    'post_type' => 'attachment',
+                    'post_mime_type' => 'image',
+                    'order' => 'ASC', 
+                    'orderby' => 'menu_order ID');
+            $_attachments = get_posts( $params );
+            $attachments = array();
+            foreach ( $_attachments as $key => $val ) {
+                    $attachments[$val->ID] = $_attachments[$key];
+            }
+    } elseif ( !empty($exclude) ) {
+            $params = array(
+                    'post_parent' => $id,
+                    'exclude' => $exclude,
+                    'post_status' => 'inherit',
+                    'post_type' => 'attachment',
+                    'post_mime_type' => 'image',
+                    'order' => 'ASC', 
+                    'orderby' => 'menu_order ID');
+            $attachments = get_children( $params );
+    } else {
+            $params = array(
+                    'post_parent' => $id, 
+                    'post_status' => 'inherit', 
+                    'post_type' => 'attachment',
+                    'post_mime_type' => 'image', 
+                    'order' => 'ASC',
+                    'orderby' => 'menu_order ID'); 
+            $attachments = get_children( $params );
+    }
+
+    if ( empty($attachments) )
+            return '';
+
+    $selector = "gallery-{$instance}";
+
+    $gallery_div = sprintf("<div class='flexslider'><ul id='%s' class='slides gallery galleryid-%d gallery-columns-1 gallery-size-full'>", $selector, $id);
+    $output = $gallery_div;
+
+
+    foreach ( $attachments as $id => $attachment ) {
+        /* 
+        Use wp_get_attachment_link to return a photo + link 
+        to attachment page or image
+        http://codex.wordpress.org/Function_Reference/wp_get_attachment_link 
+        */
+        $img = wp_get_attachment_image( $id, 'full', false);
+
+        $caption = $attachment->post_excerpt;
+
+        /*
+        Set the caption string if there is one.
+        */
+
+        if( $captiontag && trim($attachment->post_excerpt) ){
+            $caption = sprintf("\n\t<figcaption class='wp-caption-text gallery-caption'>\n\t<div>\n%s\n\t</div>\n\t</figcaption>", wptexturize($attachment->post_excerpt));
+        }
+
+
+        /*
+        Set the output for each slide.
+        */  
+        $output .= sprintf("<li class='gallery-item'><figure class='gallery-icon'>%s\n\t%s</figure></li>", $img, $caption);
+    }
+
+    $output .= '</ul></div>';
+    return $output;
+}
+
+
+function custom_gallery_shortcode( $output = '', $attrs){
+    $return = $output;
+
+    # Gallery function that returns new markup.
+    $gallery = build_gallery_content( $attrs );
+
+
+    if( !empty( $gallery ) ) {
+        $return = $gallery;
+    }
+
+    return $return;
+}
+
+add_filter( 'post_gallery', 'custom_gallery_shortcode', 10, 2);
