@@ -19,8 +19,11 @@
                 jQuery('.flexslider').flexslider({
                     animation: "slide",
                     direction: "horizontal",
-                    slideshowSpeed: 8000,
-                    animationSpeed: 3000
+                    slideshowSpeed: 9000,
+                    animationSpeed: 1300,
+                    smoothHeight: true,
+                    //controlNav: false,
+                    //directionNav: false
                 });
             });
         </script>
@@ -67,9 +70,9 @@
                         <?php } ?>
 
             
-                      <p class=flex-caption>
+                      <div class=flex-caption>
 	                  <?php the_post_thumbnail_caption(); ?>
-                      </p> <!-- .flex-caption -->
+                      </div> <!-- .flex-caption -->
                         </li>
                     <?php endwhile; ?>
  

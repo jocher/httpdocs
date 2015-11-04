@@ -19,59 +19,40 @@
 
 				<div id="inner-content" class="wrap cf">
 
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
+						<main id="main" class="m-all cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
 							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 
-								<header class="article-header">
+								
 
-									<h1 class="page-title"><?php the_title(); ?></h1>
+							<section>
+					           <div class="flexslider">
+									<ul class="slides">
 
-									<p class="byline vcard">
-										<?php printf( __( 'Posted <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> by <span class="author">%3$s</span>', 'bonestheme' ), get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
-
-
-								</header>
-
-								<section>
-									<div class="flexslider">
-										<ul class="slides">
-
-									<?php
-									query_posts(array('posts_per_page' => 3, 'category_name' => 'Featured'));
+								<?php
+									query_posts(array('posts_per_page' => 9, 'category_name' => 'Featured'));
 									if(have_posts()) : while(have_posts()) : the_post();
 									?>
 
 								<li class="featured_post">
+									
 									<?php the_post_thumbnail('slider-image');?>
 									<div class="caption">
-									  <a href="#" class="slider-title"><?php the_title();?></a> 
-									  <?php the_excerpt(); ?>
-									  <a href="<?php the_permalink(); ?>" class="btn">Read More! </a>
+								 <?php the_content(); ?>
 								    </div>
 
-							     </li>
+							    </li>
 
-							     <?php
-							     endwhile;
-							     endif;
-							     wp_reset_query();
+							      <?php
+							      endwhile;
+							      endif;
+							      wp_reset_query();
 							     ?>
-							 </ul>
-hello joe							</div>
-								</section>
-
-
-								<footer class="article-footer">
-
-                  <?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
-
-								</footer>
-
-								<?php comments_template(); ?>
+							         </ul>
+				                </div>
+							</section>
 
 							</article>
 

@@ -1,201 +1,111 @@
 <?php
 /*
- Template Name: contact us
- *
- * This is your custom page template. You can create as many of these as you need.
- * Simply name is "page-whatever.php" and in add the "Template Name" title at the
- * top, the same way it is here.
- *
- * When you create your page, you can just select the template and viola, you have
- * a custom page template to call your very own. Your mother would be so proud.
- *
- * For more info: http://codex.wordpress.org/Page_Templates
+Template Name: Contact
 */
 ?>
 
-<?php get_header(); ?>
-
-			<div id="content">
-
-				<div id="inner-content" class="wrap cf">
-
-						<main id="main" class="m-all t-2of3 d-5of7 cf" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
-
-							<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'cf' ); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
-
-								<header class="article-header">
-
-									<h1 class="page-title"><?php the_title(); ?></h1>
-
-									<p class="byline vcard">
-										<?php printf( __( 'Posted <time class="updated" datetime="%1$s" itemprop="datePublished">%2$s</time> by <span class="author">%3$s</span>', 'bonestheme' ), get_the_time('Y-m-j'), get_the_time(get_option('date_format')), get_the_author_link( get_the_author_meta( 'ID' ) )); ?>
-									</p>
-
-
-								</header>
-
-								<section class="entry-content cf" itemprop="articleBody">
-									<?php
-										
-  $response = "";
-
-  //function to generate response
-  function my_contact_form_generate_response($type, $message){
-
-    global $response;
-
-    if($type == "success") $response = "<div class='success'>{$message}</div>";
-    else $response = "<div class='error'>{$message}</div>";
-
+<?php
+if(isset($_POST['submitted'])) {
+  if(trim($_POST['contactName']) === '') {
+    $nameError = 'Please enter your name.';
+    $hasError = true;
+  } else {
+    $name = trim($_POST['contactName']);
   }
 
-  //response messages
-  $not_human       = "Human verification incorrect.";
-  $missing_content = "Please supply all information.";
-  $email_invalid   = "Email Address Invalid.";
-  $message_unsent  = "Message was not sent. Try Again.";
-  $message_sent    = "Thanks! Your message has been sent.";
+  if(trim($_POST['email']) === '')  {
+    $emailError = 'Please enter your email address.';
+    $hasError = true;
+  } else if (!preg_match("/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim($_POST['email']))) {
+    $emailError = 'You entered an invalid email address.';
+    $hasError = true;
+  } else {
+    $email = trim($_POST['email']);
+  }
 
-  //user posted variables
-  $name = $_POST['message_name'];
-  $email = $_POST['message_email'];
-  $message = $_POST['message_text'];
-  $human = $_POST['message_human'];
-
-  //php mailer variables
-  $to = get_option('admin_email');
-  $subject = "Someone sent a message from ".get_bloginfo('name');
-  $headers = 'From: '. $email . "\r\n" .
-    'Reply-To: ' . $email . "\r\n";
-
-  if(!$human == 0){
-    if($human != 2) my_contact_form_generate_response("error", $not_human); //not human!
-    else {
-
-      //validate email
-      if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-        my_contact_form_generate_response("error", $email_invalid);
-      else //email is valid
-      {
-        //validate presence of name and message
-        if(empty($name) || empty($message)){
-          my_contact_form_generate_response("error", $missing_content);
-        }
-        else //ready to go!
-        {
-          $sent = wp_mail($to, $subject, strip_tags($message), $headers);
-          if($sent) my_contact_form_generate_response("success", $message_sent); //message sent!
-          else my_contact_form_generate_response("error", $message_unsent); //message wasn't sent
-        }
-      }
+  if(trim($_POST['comments']) === '') {
+    $commentError = 'Please enter a message.';
+    $hasError = true;
+  } else {
+    if(function_exists('stripslashes')) {
+      $comments = stripslashes(trim($_POST['comments']));
+    } else {
+      $comments = trim($_POST['comments']);
     }
   }
-  else if ($_POST['submitted']) my_contact_form_generate_response("error", $missing_content);
 
-?>
+  if(!isset($hasError)) {
+    $emailTo = get_option('tz_email');
+    if (!isset($emailTo) || ($emailTo == '') ){
+      $emailTo = get_option('admin_email');
+    }
+    $subject = '[PHP Snippets] From '.$name;
+    $body = "Name: $name \n\nEmail: $email \n\nComments: $comments";
+    $headers = 'From: '.$name.' <'.$emailTo.'>' . "\r\n" . 'Reply-To: ' . $email;
 
+    wp_mail($emailTo, $subject, $body, $headers);
+    $emailSent = true;
+  }
+
+} ?>
 <?php get_header(); ?>
+  <div id="content">
+   <div id="inner-content" class="wrap cf">
+    <main id="main" class="m-all" role="main" itemscope itemprop="mainContentOfPage" itemtype="http://schema.org/Blog">
 
-  <div id="primary" class="site-content">
-    <div id="content" role="main">
-
-      <?php while ( have_posts() ) : the_post(); ?>
-
-          <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-            <header class="entry-header">
-              <h1 class="entry-title"><?php the_title(); ?></h1>
-            </header>
-
-            <div class="entry-content">
-              <?php the_content(); ?>
-
-              <style type="text/css">
-                .error{
-                  padding: 5px 9px;
-                  border: 1px solid red;
-                  color: red;
-                  border-radius: 3px;
-                }
-
-                .success{
-                  padding: 5px 9px;
-                  border: 1px solid green;
-                  color: green;
-                  border-radius: 3px;
-                }
-
-                form span{
-                  color: red;
-                }
-              </style>
-
-              <div id="respond">
-                <?php echo $response; ?>
-                <form action="<?php the_permalink(); ?>" method="post">
-                  <p><label for="name">Name: <span>*</span> <br><input type="text" name="message_name" value="<?php echo esc_attr($_POST['message_name']); ?>"></label></p>
-                  <p><label for="message_email">Email: <span>*</span> <br><input type="text" name="message_email" value="<?php echo esc_attr($_POST['message_email']); ?>"></label></p>
-                  <p><label for="message_text">Message: <span>*</span> <br><textarea type="text" name="message_text"><?php echo esc_textarea($_POST['message_text']); ?></textarea></label></p>
-                  <p><label for="message_human">Human Verification: <span>*</span> <br><input type="text" style="width: 60px;" name="message_human"> + 3 = 5</label></p>
-                  <input type="hidden" name="submitted" value="1">
-                  <p><input type="submit"></p>
-                </form>
+      <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+      <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+        <h1 class="entry-title"><?php the_title(); ?></h1>
+          <div class="entry-content">
+            <?php if(isset($emailSent) && $emailSent == true) { ?>
+              <div class="thanks">
+                <p>Thanks, your email was sent successfully.</p>
               </div>
+            <?php } else { ?>
+              <?php the_content(); ?>
+              <?php if(isset($hasError) || isset($captchaError)) { ?>
+                <p class="error">Sorry, an error occured.<p>
+              <?php } ?>
 
+            <form action="<?php the_permalink(); ?>" id="contactForm" method="post">
+              <ul class="contactform">
+              <li>
+                <label for="contactName">Name:</label>
+                <input type="text" name="contactName" id="contactName" value="<?php if(isset($_POST['contactName'])) echo $_POST['contactName'];?>" class="required requiredField" />
+                <?php if($nameError != '') { ?>
+                  <span class="error"><?=$nameError;?></span>
+                <?php } ?>
+              </li>
 
-            </div><!-- .entry-content -->
+              <li>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="<?php if(isset($_POST['email']))  echo $_POST['email'];?>" class="required requiredField email" />
+                <?php if($emailError != '') { ?>
+                  <span class="error"><?=$emailError;?></span>
+                <?php } ?>
+              </li>
 
-          </article><!-- #post -->
+              <li><label for="commentsText">Message:</label>
+                <textarea name="comments" id="commentsText" rows="20" cols="30" class="required requiredField"><?php if(isset($_POST['comments'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['comments']); } else { echo $_POST['comments']; } } ?></textarea>
+                <?php if($commentError != '') { ?>
+                  <span class="error"><?=$commentError;?></span>
+                <?php } ?>
+              </li>
 
-      <?php endwhile; // end of the loop. ?>
+              <li>
+                <input type="submit">Send email</input>
+              </li>
+            </ul>
+            <input type="hidden" name="submitted" id="submitted" value="true" />
+          </form>
+        <?php } ?>
+        </div><!-- .entry-content -->
+      </div><!-- .post -->
 
+        <?php endwhile; endif; ?>
+        </main>
     </div><!-- #content -->
-  </div><!-- #primary -->
-										wp_link_pages( array(
-											'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'bonestheme' ) . '</span>',
-											'after'       => '</div>',
-											'link_before' => '<span>',
-											'link_after'  => '</span>',
-										) );
-									?>
-								</section>
-
-
-								<footer class="article-footer">
-
-                  <?php the_tags( '<p class="tags"><span class="tags-title">' . __( 'Tags:', 'bonestheme' ) . '</span> ', ', ', '</p>' ); ?>
-
-								</footer>
-
-								<?php comments_template(); ?>
-
-							</article>
-
-							<?php endwhile; else : ?>
-
-									<article id="post-not-found" class="hentry cf">
-											<header class="article-header">
-												<h1><?php _e( 'Oops, Post Not Found!', 'bonestheme' ); ?></h1>
-										</header>
-											<section class="entry-content">
-												<p><?php _e( 'Uh Oh. Something is missing. Try double checking things.', 'bonestheme' ); ?></p>
-										</section>
-										<footer class="article-footer">
-												<p><?php _e( 'This is the error message in the page-custom.php template.', 'bonestheme' ); ?></p>
-										</footer>
-									</article>
-
-							<?php endif; ?>
-
-						</main>
-
-						<?php get_sidebar(); ?>
-
-				</div>
-
-			</div>
+  </div><!-- #container -->
 
 
 <?php get_footer(); ?>

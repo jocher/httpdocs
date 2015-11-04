@@ -1251,12 +1251,16 @@ and will be used across all viewports.
 GENERAL STYLES
 *********************/
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   font-size: 100%;
   line-height: 1.5;
-  color: #737373;
+  color: #696969;
   background-color:transparent;
   -webkit-font-smoothing: antialiased; }
+
+
+
+
 
 /********************
 WORDPRESS BODY CLASSES
@@ -1337,33 +1341,37 @@ H1, H2, H3, H4, H5 STYLES
 ******************************************************************/
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   text-rendering: optimizelegibility;
-  font-weight: 500;
+  font-weight: normal;
+  font-family: 'Oswald', sans-serif;
   /*
   if you're going to use webfonts, be sure to check your weights
   http://css-tricks.com/watch-your-font-weight/
   */
   /* removing text decoration from all headline links */ }
   h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a {
-    text-decoration: none; }
+    text-decoration: none;
+    
+     }
 
 h1, .h1 {
-  font-size: 2.5em;
+  font-size: 1.7em;
   line-height: 1.333em; }
 
 h2, .h2 {
-  font-size: 1.75em;
+  font-size: 1.2em;
   line-height: 1.4em;
-  margin-bottom: 0.375em; }
+  margin-bottom: 0.375em;
+  margin-top: 0.15em }
 
 h3, .h3 {
-  font-size: 1.125em; }
+  font-size: 1em; }
 
 h4, .h4 {
-  font-size: 1.1em;
-  font-weight: 700; }
+  font-size: 0.8461em;
+   }
 
 h5, .h5 {
-  font-size: 0.846em;
+  font-size: 0.646em;
   line-height: 2.09em;
   text-transform: uppercase;
   letter-spacing: 2px; }
@@ -1392,13 +1400,13 @@ HEADER STYLES
 
 #langswitch {
   float:right;
-  margin: -16px 0 3px;
+  margin: -16px 0 3px 0;
   z-index:555;
   width:66px;height:66px;
   border-radius:33px;
   text-align:center;
   background:#b3c8c6;
-  box-shadow: 0 0 0.01em 0.05em #b3c8c6;
+  
          
 }
 
@@ -1408,11 +1416,14 @@ HEADER STYLES
             
 }
 #langswitch li {
-  padding-top: 1.53em;
+  padding-top: 1.6em;
   line-height: 0.5em;
   list-style:none;
-  font-size:12px;
-  font-weight:bold;
+  font-family: 'Oswald', sans-serif;
+  font-size:11px;
+  font-weight: normal;
+
+  
   
 }
 #langswitch a {
@@ -1444,7 +1455,7 @@ and more scalable.
 */
 .nav {
   border-bottom: 0;
-  padding-right: 8px;
+  
   float: left;
   width:100%;
   margin-top: 0.40em;  /* end .menu li */
@@ -1462,40 +1473,49 @@ and more scalable.
     */ }
 
     .nav li a {
-      font-size: 79%;
+      font-size: 82%;
+      font-family: 'Oswald', sans-serif;
       display: block;
-      color: #737373;
+      color: #696969;
       text-decoration: none;
-      padding: 0.40em 0.50em;
+      padding: 0.40em 0.53em  0.40em 0;
+      border-radius: 0.15em;
+      
       /*
       remember this is for mobile ONLY, so there's no need
       to even declare hover styles here, you can do it in
       the style.scss file where it's relevant. We want to
       keep this file as small as possible!
       */ }
+
       
        .nav li ul.sub-menu,
       .nav li ul.children {
-        -moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-        -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-        box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+   
         background-color: #fff;
-        margin-top: 1px;
+        margin-top: 0;
         border-top: 0;
+        border: 1px solid #ccc;
+        border-radius: 0.15em;
+        border-top-style: none;
+        width: 93px;
         position: absolute;
         visibility: hidden;
-        z-index: 8999;}
+        z-index: 8999;
+        left:13px;
+      }
 
 
      .nav li ul.sub-menu li a,
           .nav li ul.children li a {
 
-            padding:  0.40em 0.50em;
+            padding:  0.40em 0.55em;
             border-right: 0;
             display: block;
-            width: 105px;
-            border-bottom: 1px solid #ccc;
-
+            width: 91px;
+            border-top: 1px solid #ccc;
+            margin-left: 0;
+            
              }
 
           .nav li ul.sub-menu li:last-child a,
@@ -1514,8 +1534,7 @@ and more scalable.
 .nav .current-menu-ancestor > a,
 .nav .current_page_item > a,
 .nav .current_page_ancestor > a {
-  font-weight: bold;
-  color:#516579;}
+  color:#3c5268;}
 /* end .nav */
 /*********************
 POSTS & CONTENT STYLES
@@ -1532,11 +1551,12 @@ POSTS & CONTENT STYLES
   margin-bottom: 0;}
 
   .hentry header {
-    border-bottom: 1px solid #f8f9fa;
+    /*border-bottom: 1px solid #f8f9fa;*/
     padding: 1.5em; }
   .hentry footer {
     padding: 1.5em;
-    border-top: 1px solid #f8f9fa; }
+    /*border-top: 1px solid #f8f9fa; */
+    }
     .hentry footer p {
       margin: 0; }
 
@@ -1563,7 +1583,7 @@ POSTS & CONTENT STYLES
 
 /* entry content */
 .entry-content {
-  padding: 1.5em 0 0;
+  padding: 5px 0;
   /*
   image alignment on a screen this size may be
   a bit difficult. It's set to start aligning
@@ -1609,7 +1629,7 @@ POSTS & CONTENT STYLES
     color: #787878;
     margin-bottom: 1.5em; }
   .entry-content img {
-    margin: 0 0 1.5em 0;
+    margin: 0 0 0.2em 0;
     max-width: 100%;
     height: auto; }
   .entry-content .size-auto,
@@ -1630,9 +1650,9 @@ POSTS & CONTENT STYLES
 /* end .entry-content */
 .wp-caption {
   max-width: 100%;
-  background: #eee;
+  /* ibackground: #eee;
   padding: 5px;
-  /* images inside wp-caption */ }
+  mages inside wp-caption */ }
   .wp-caption img {
     max-width: 100%;
     margin-bottom: 0;
@@ -1644,9 +1664,9 @@ POSTS & CONTENT STYLES
 
     .wp-caption-text {
   max-width: 100%;
-  background: #eee;
+   /* background: #eee;
   padding: 5px;
-  /* images inside wp-caption */ }
+ images inside wp-caption */ }
 
 /* end .wp-caption */
 /* image gallery styles */
@@ -1859,7 +1879,11 @@ FOOTER STYLES
   background-color:transparent;
   color: #737373; }
 
-  .copyright {width:100%;float:left;font-size: 0.6em}
+  .copyright {width:100%;
+    float:left;
+    font-size: 0.6em;
+    padding: 43px 0 14px;
+  }
 
   .social 
   {float:right; width: 26%;text-align: right;
@@ -1901,15 +1925,39 @@ view.
 }
 .footer-links li a{
   
-  font-size: 79%;
+  font-size: 82%;
+  font-family: 'Oswald', sans-serif;
   text-decoration: none;
-  color: #737373; 
+  color: #696969; 
 }
 
 .footer-links .current-menu-ancestor > a,
 .footer-links .current_page_item > a,
 .footer-links .current_page_ancestor > a {
   font-weight: bold;
+}
+
+.colu {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2; 
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  -webkit-column-rule: 1px dotted #ddd;
+  -moz-column-rule: 1px dotted #ddd;
+  column-rule: 1px dotted #ddd;
+  -webkit-hyphens: auto;
+  -epub-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  font-size: 90%;
+  text-align: justify;
+}
+.caption {
+  font-size: 90%;
+  
+
 }
 
 /*********************
@@ -1936,7 +1984,12 @@ tweeners.
   
   ******************************************************************/
 
-
+.colu {
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
+  
+}
 
    
 
@@ -1958,12 +2011,26 @@ tweeners.
 }
 .nav li a{
   
-  font-size: 83%;
-  
+  font-size: 85%;
+  padding: 0.40em 0.40em;
+  margin-left: 9px;
 }
 
+ .nav li ul.sub-menu,
+      .nav li ul.children {
+   
+        width: 97px;
+        left:23px;
+      }
 
 
+     .nav li ul.sub-menu li a,
+          .nav li ul.children li a {
+
+            width: 95px;
+
+            
+             }
 
 
   /* end .menu */
@@ -1999,7 +2066,7 @@ tweeners.
 .footer-links ul{
   margin-top:0;}
 
-.footer li a {font-size: 83%;
+.footer li a {font-size: 85%;
 
 padding-right: 2.2em;}
 
@@ -2044,21 +2111,32 @@ you can add resource intensive styles.
    max-width: 1000px;
    
     }
+
+  .entry-content {
+  padding: 1.5em 0 1.5em 0;
+  }
+
+.colu {
+  -webkit-column-gap: 3em;
+  -moz-column-gap: 3em;
+  column-gap: 3em;
+  
+}
    
   /*********************
+
   HEADER STYLES
   *********************/
   
   #inner-header{
-  padding-top: 64px;
+  padding-top: 60px;
  }
   /*********************
   NAVIGATION STYLES
   *********************/
   
   .nav {
-    
-    padding-right: 7px;
+   
     
 
     /* end .menu ul li */
@@ -2068,13 +2146,14 @@ you can add resource intensive styles.
     
       .nav li a {
         
-        padding:0.30em 0.50em 0.35em;
-        font-size: 86%;
-        margin-right: 2px;
-        -moz-box-shadow: 0 0 0.01em 0.02em #fff;
-        -webkit-box-shadow:  0 0 0.01em 0.02em #fff;
-         box-shadow: 0 0 0.01em 0.02em #fff;
-         border-radius: 0.2em;
+        padding:0.30em 0.70em 0.30em;
+        font-size: 88%;
+        margin-left:6px;
+        margin-right:6px;
+
+        
+        
+         
 
         
         /*
@@ -2082,26 +2161,20 @@ you can add resource intensive styles.
         has the possibility of being a mobile device.
         */ }
         .nav li a:hover, .nav li a:focus {
-        -moz-box-shadow: 0 0 0.01em 0.02em #516579;
-        -webkit-box-shadow:  0 0 0.01em 0.02em #516579;
-         box-shadow: 0 0 0.01em 0.02em #516579;
-         border-radius: 0.2em;
-         
-          background-color: #516579;
-          color: #fff;  }
+          background-color: #3c5268;
+          color: #dbbea3;  
+        }
       .nav li ul.sub-menu,
       .nav li ul.children {
-        
-        left:13px;
-        
+        width: 97px;
+        left:20px;
         /* highlight sub-menu current page */ }
         
           .nav li ul.sub-menu li a,
           .nav li ul.children li a {
 
-            padding:0.30em 0.50em 0.35em;
-            margin-right: 0;
-            border-bottom: 0.1em solid #ccc;
+            padding:0.30em 0.50em 0.30em;
+            width: 95px;
 
              }
 
@@ -2120,13 +2193,8 @@ you can add resource intensive styles.
 .nav .current-menu-ancestor > a,
 .nav .current_page_item > a,
 .nav .current_page_ancestor > a {
-  -moz-box-shadow: 0 0 0.01em 0.02em #516579;
-  -webkit-box-shadow: 0 0 0.01em 0.02em #516579;
-  box-shadow: 0 0 0.01em 0.02em #516579;
-         border-radius: 0.2em;
-         background-color: #516579;
-  
-          color: #fff;}
+        background-color: #3c5268;
+        color: #dbbea3;}
 
   /* end .nav */
   /*********************
@@ -2136,7 +2204,7 @@ you can add resource intensive styles.
     margin-top: 2.2em; }
 
   .widgettitle {
-    border-bottom: 2px solid #444;
+    border-bottom: 1px solid #cccccc;
     margin-bottom: 0.75em; }
 
   .widget {
@@ -2190,8 +2258,15 @@ you can add resource intensive styles.
                 padding:0 26px;
                 border-top: 33px;
           } 
- /* #inner-header{border: 1px solid #e1e1e1; 
+
+
+          /*FRAME*/
+ #inner-header{
+margin-top: 44px;padding-top: 60px;
+  border: 1px solid #e1e1e1; 
                 border-bottom-style: none;
+                border-radius: 9px 9px 0 0;
+
                 }
 
   #inner-content{border: 1px solid #e1e1e1; 
@@ -2200,26 +2275,29 @@ you can add resource intensive styles.
                 }
   #inner-footer{border: 1px solid #e1e1e1; 
                 border-top-style:none;
+                border-radius:  0 0 9px 9px;
+                margin-bottom: 68px;
                 }
-                */
+                
 
-.nav {
-    
-    padding-right: 18px;
-    }
-   .nav li a {
+
+.nav li a {
           font-size: 95%;
-          padding:0.30em 0.55em 0.35em;
-          margin-right: 8px;
+          margin-right: 10px;
           }
+.nav li ul.sub-menu,
+.nav li ul.children {
+        width: 105px;
+         }
+        
+.nav li ul.sub-menu li a, 
+.nav li ul.children li a {
+    width: 103px;
+             }
 
-  .nav li ul.sub-menu li a,
-  .nav li ul.children li a {
-          padding:0.30em 0.55em 0.35em;
-          width: 120px;
-          margin-right: 0;
+          
           }              
-   .footer li a {
+.footer li a {
            font-size: 95%;
            padding-right: 4em;}
            }
